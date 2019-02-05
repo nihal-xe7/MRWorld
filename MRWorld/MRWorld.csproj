@@ -263,6 +263,8 @@
     <Content Include="Views\Suggestion\Index.cshtml" />
     <Content Include="Views\Movie\MovieDetails.cshtml" />
     <Content Include="Views\Movie\MovieData.cshtml" />
+    <Content Include="Views\Movie\GetMovies.cshtml" />
+    <Content Include="Views\Suggestion\GetMovies.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

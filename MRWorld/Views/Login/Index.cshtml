@@ -9,7 +9,7 @@
 
     }
 </script>
-
+@Html.Raw(TempData["msg"])
 <h2>Login Page</h2>
 
 @using (Html.BeginForm("LoginCheck", "Login", FormMethod.Post, new {@class = "form-horizontal", role = "form"}))

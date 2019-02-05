@@ -63,7 +63,7 @@ namespace MRWorld.Controllers
             _context.MemberShips.Add(member);
             _context.SaveChanges();
             
-            return Content("hello");
+            return RedirectToAction("Index","Login");
         }
 	}
 }
