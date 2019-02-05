@@ -1,0 +1,84 @@
+﻿
+@model MRWorld.Models.AddMovie
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+
+<script>
+    function searchData(val) {
+        console.log(val);
+        if (val === "") {
+            
+            $("#cMovies").html("");
+            $("#cMovies").animate({
+                height: "0px",
+            });
+        } else {
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("CollectData")',
+                data: {name:val},
+                success: function (result) {
+                    var str = "";
+                    console.log(result);
+                    if (result.data != "") {
+                        $("#cMovies").animate({
+                            height: "100px",
+                        });
+                        $("#cMovies").html(result.data);
+
+                    } else {
+                        str = "<li>No Movie Found</li>";
+                        $("#cMovies").html(str);
+
+                    }
+                },
+                error: function (err) {
+                    console.error(err);
+                }
+
+            });
+        }
+    }
+</script>
+@Html.Raw(TempData["msg"])
+
+<br/>
+<br/>
+<h2>Welcome To Movie List</h2>
+<p>Here Are Some Movie Added by the Users. Hope u will Find important information from here</p>
+<hr />
+<div class="form-control col-md-10">
+    <input type="text" class="form-group col-md-10" onkeyup="searchData(this.value)" style="border: 0px" placeholder="Search...."/>
+    <div id="cMovies" style="border: 1px; border-color: darkslategrey;background-color:burlywood"></div>
+</div>
+<br/>
+<br/>
+<br/>
+
+
+<table class="table table-hover">
+<thead>
+<tr>
+    
+    <th scope="col">Name</th>
+    <th scope="col">Genre</th>
+    <th scope="col">Release Date</th>
+    <th scope="col">Rating</th>
+</tr>
+</thead>
+<tbody>
+    @foreach (var movie in Model.Movies)
+    {
+        <tr class="table-primary" onclick="location.replace('/Movie/MovieDetails/@movie.Id')">
+            <td>@movie.Name</td>
+            <td>@movie.Genre</td>
+            <td>@movie.ReleaseDate</td>
+            <td>@movie.Rating</td>
+        </tr>
+    }
+</tbody>
+</table>

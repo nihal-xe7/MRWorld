@@ -1,0 +1,33 @@
+﻿@model List<MRWorld.Models.Suggestion>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Movie Suggestion</h2>
+
+<table class="table table-hover">
+    <thead>
+    <tr>
+
+        <th scope="col">Movie Name</th>
+        <th scope="col">Genre</th>
+        <th scope="col">Release Date</th>
+        <th scope="col">Rating</th>
+        <th scope="col">Added By</th>
+    </tr>
+    </thead>
+    <tbody>
+            @foreach (var movie in Model)
+    {
+        <tr class="table-primary" onclick="location.replace('/Movie/MovieDetails/@movie.Id')">
+                <td>@movie.MovieName</td>
+                <td>@movie.Genre</td>
+                <td>@movie.ReleaseDate</td>
+                <td>@movie.Rating</td>
+                <td>@movie.AddedBy</td>
+
+            </tr>
+    }
+    </tbody>
+</table>
+

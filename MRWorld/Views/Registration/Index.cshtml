@@ -1,0 +1,77 @@
+﻿@model MRWorld.Models.Registration
+@{
+    ViewBag.Title = "Index";
+}
+
+<script>
+    function locateToLogin() {
+        location.replace("http://localhost:24228/Login");
+    }
+</script>
+
+
+<h2>Welcome to sign up page.</h2>
+<p style="color: darkcyan">Please fill up all the fields</p>
+
+@using (Html.BeginForm("Create", "Registration", FormMethod.Post, new {@class = "form-horizontal", role = "form"}))
+{
+   @Html.AntiForgeryToken()
+    <hr/>
+@Html.ValidationSummary()
+    <hr/>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Name, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m=>m.Name)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m=>m.Email)
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+    <div class="col-md-10">
+        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m=>m.Password)
+    </div>
+    </div>
+        
+    <div class="form-group">
+        @Html.LabelFor(m=>m.ConfirmPassword ,new {@class="col-md-2 control-label"})
+        <div class="col-md-10">
+            @Html.PasswordFor(m=>m.ConfirmPassword,new{@class="form-control"})
+            @Html.ValidationMessageFor(m=>m.Name)
+        </div>
+        </div>
+
+        
+    <div class="form-group">
+        @Html.LabelFor(m=>m.MemberShipType ,new {@class="col-md-2 control-label"})
+        <div class="col-md-10">
+           
+            @Html.TextBoxFor(m => m.MemberShipType, new {@class = "form-control"})
+            @Html.ValidationMessageFor(m => m.MemberShipType)
+        </div>
+    </div>
+
+<div class="form-group">
+    <div class="col-md-offset-2 col-md-10">
+        <input type="submit" class="btn btn-outline-info" value="Register" />
+        <input type="button" onclick="locateToLogin()" class="btn btn-outline-info" value="I want to LOGIN" />
+    </div>
+</div>
+
+
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
