@@ -1,0 +1,107 @@
+﻿
+@{
+    string xor = " ";
+    if (!String.IsNullOrEmpty(Session["UserName"].ToString()))
+    {
+        if (Session["UserName"].ToString().Equals("Admin"))
+        {
+            xor = "Delete Movie";
+        }
+        else
+        {
+            xor = Session["UserName"].ToString();
+        }
+    }
+}
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Welcome to MRWorld</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>  
+
+</head>
+
+<script>
+    var x = 0;
+    console.log(x);
+    $(document).ready(function () {
+        console.log("Ready 100%");
+
+    });
+
+</script>
+
+
+<body>
+
+<div class="container">
+    <!--Nav Bar-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#" style="color: maroon">MRWorld</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarColor02">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    @Html.ActionLink("Home", "Index", "Home", null, new { @class = "nav-link" })
+                </li>
+                <li class="nav-item">
+                    @Html.ActionLink("Add Movie", "Index", "AddMovies", null, new { @class = "nav-link" })
+                </li>
+                <li class="nav-item">
+                    @Html.ActionLink("Movie List", "Index", "Movie", null, new { @class = "nav-link" })
+                </li>
+                <li class="nav-item">
+                    @Html.ActionLink("Suggestion", "Index", "Suggestion", null, new { @class = "nav-link" })
+                </li>
+                <li class="nav-item">
+                    @Html.ActionLink("About", "About", "Home", null, new { @class = "nav-link" })
+                </li>
+                @if (!String.IsNullOrEmpty(xor) && xor.Equals("Delete Movie"))
+                {
+                    <li class="nav-item">
+                        @Html.ActionLink(@xor, "DeleteMovieIndex", "Movie", null, new {@class = "nav-link"})
+                    </li>
+                }else if (!String.IsNullOrEmpty(xor))
+                {
+                    <li class="nav-item">
+                        @Html.ActionLink(@xor, "UserData", "Home", null, new {@class = "nav-link"})
+                    </li>
+                }
+
+                <li class="nav-item">
+                    @Html.ActionLink("Log Out", "LogOut", "Login", null, new { @class = "nav-link" })
+                </li>
+            </ul>
+
+        </div>
+    </nav>
+    <!---->
+<br/>
+<br/>
+
+
+<div class="container body-content">
+    @RenderBody()
+    <hr/>
+    <footer>
+        <p>&copy; @DateTime.Now.Year - Written By Nihal</p>
+    </footer>
+</div>
+
+</div>
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+@RenderSection("scripts", required: false)
+</body>
+</html>
